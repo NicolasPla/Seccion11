@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,13 +17,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // FORMA NATIVA DE PARSEAR JSON
 
-        String json = "{ id: 1,\n" +
-                    "name: 'London'," +
-                    "}";
+        String json = "{" +
+                "id: 0," +
+                "ciudades: ["+
+                "{" +
+                    "id: '1'," +
+                    "name: 'London'" +
+                "},"+
+                "{" +
+                    "id: '2'," +
+                    "name: 'Seville'" +
+                "}]"+
+                "}";
 
-        City city = null;
+
+        // Libreria Gson // Como parsear con Gson
+
+        Gson gson = new GsonBuilder().create();
+        Town town = gson.fromJson(json, Town.class);
+
+    }
+}
+
+
+// FORMA NATIVA DE PARSEAR JSON
+
+/*        City city = null;
 
         try{
             JSONObject mJson = new JSONObject(json);
@@ -36,6 +59,5 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Toast.makeText(this, city.getId() + " -- " + city.getName(), Toast.LENGTH_LONG).show();
-    }
-}
+       // Toast.makeText(this, city.getId() + " -- " + city.getName(), Toast.LENGTH_LONG).show();
+*/

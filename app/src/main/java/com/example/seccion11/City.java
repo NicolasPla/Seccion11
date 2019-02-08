@@ -1,9 +1,12 @@
 package com.example.seccion11;
 
+import com.google.gson.annotations.Expose;
+
 public class City {
 
-    public int id;
-    public String name;
+    @Expose
+    private int id;
+    private String name;
 
     public City(int id, String name) {
         this.id = id;
