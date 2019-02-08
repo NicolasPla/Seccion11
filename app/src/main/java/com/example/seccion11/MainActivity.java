@@ -2,6 +2,10 @@ package com.example.seccion11;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -9,5 +13,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // FORMA NATIVA DE PARSEAR JSON
+
+        String json = "{ id: 1,\n" +
+                    "name: 'London'," +
+                    "}";
+
+        City city = null;
+
+        try{
+            JSONObject mJson = new JSONObject(json);
+
+            int id = mJson.getInt("id");
+            String name = mJson.getString("name");
+
+            // Otra forma de conseguir el string
+            //String name = (String) mJson.get("name");
+
+            city = new City(id, name);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        Toast.makeText(this, city.getId() + " -- " + city.getName(), Toast.LENGTH_LONG).show();
     }
 }
